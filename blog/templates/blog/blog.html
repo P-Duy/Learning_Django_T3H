@@ -1,0 +1,87 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<h1>Danh sach bai viet</h1>
+<hr/>
+
+<div class="row">
+    <div class="col">
+        <form method="GET" action"">
+            {% csrf_token %}
+            <div class="d-flex">
+                <label class="p-2" for="keywordInput">Từ khóa</label>
+                <div class="p-2">
+                    <input type="text" id="keywordInput" name="keywordInput" value = "{{keywordInput}}"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+            </div>
+        </form>
+    </div>
+    <div class="col d-flex justify-content-endf">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Sort
+            </button>
+                <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="?sort=-created_at
+                    {% for key, value in request.GET.items %}
+                        {% if key != 'sort' %}
+                            & {{key}}={{value}}
+                        {% endif %}
+                    {% endfor %}
+                    ">Latest</a></li>
+                <li><a class="dropdown-item" href="?sort=created_at
+                    {% for key, value in request.GET.items %}
+                        {% if key != 'sort' %}
+                            & {{key}}={{value}}
+                        {% endif %}
+                    {% endfor %}
+                    ">Oldest</a></li>
+                <li><a class="dropdown-item" href="?sort=title{% for key, value in request.GET.items %}{% if key != 'sort' %}& {{key}}={{value}}{% endif %}{% endfor %}">title</a></li>
+                </ul> 
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Limit
+            </button>
+                <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="?limit=2{% for key, value in request.GET.items %}{% if key != 'sort' %}& {{key}}={{value}}{% endif %}{% endfor %}">2</a></li>
+                <li><a class="dropdown-item" href="?limit=5{% for key, value in request.GET.items %}{% if key != 'sort' %}& {{key}}={{value}}{% endif %}{% endfor %}">5</a></li>
+                <li><a class="dropdown-item" href="?limit=10{% for key, value in request.GET.items %}{% if key != 'sort' %}& {{key}}={{value}}{% endif %}{% endfor %}">10</a></li>
+                </ul> 
+        </div>
+    </div>
+</div>
+<a href="{% url 'blog:post_add'%}" class="btn btn-primary ">Them moi</a>
+<div class="d-flex">
+    
+    {% for item in posts %}
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://placehold.co/150x150" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{item.title}}</h5>
+                <p class="card-text">{{item.summary}}</p>
+                <div class="fixed-left">
+                    <a href="{% url 'blog:post_edit' item.id %}" class="btn btn-primary ">edit</a>
+                    <a href="{% url 'blog:post_delete' item.id %}" class="btn btn-primary ">delete</a>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+</div>  
+<div class="pagination">
+    <span class="step-links">
+        {% if posts.has_previous %}
+            <a href="?page={{ posts.previous_page_number }}">First</a>
+        {% endif %}
+        <span class="current">
+            Page {{ posts.number }} / {{ posts.paginator.num_pages }}.
+        </span>
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock content %}

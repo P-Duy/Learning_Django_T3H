@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+{% block content %}
+<h3>{{post.title}}</h3>
+<hr/>
+<p>{{post.summary}}</p>
+<hr/>
+<p>{{post.content}}</p>
+<hr/>
+<a href="{% url 'blog:blog' %}">Quay lai danh sach</a>
+{% endblock content %}   

@@ -1,0 +1,8 @@
+{
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none",
+    "auto-close-tag.activationOnLanguage": ["*"],
+    "auto-rename-tag.activationOnLanguage": ["html", "xml", "php", "javascript"],
+}

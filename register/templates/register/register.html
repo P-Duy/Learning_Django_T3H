@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+{% block content %}
+<h2> tạo tài khoản mới </h2>
+<form class="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="btn btn-primary" type="submit">Register</button>
+</form>
+{%endblock%}

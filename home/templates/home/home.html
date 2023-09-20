@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+      {% for item in news_paginator %}
+        <div class="col-6 col-md-4 col-lg-3">
+          <h3><a href="{% url 'new:new_post' item.id %}">{{item.title}}</a></h3>
+        </div>
+      {% endfor %}
+    </div>
+    <hr/>
+    <hr/>
+    <div class="row">
+      <div class="row">
+        {% for item in posts_paginator %}
+          <div class="col-6 col-md-4 col-lg-3">
+            <h3><a href="{% url 'blog:post' item.id %}">{{item.title}}</a></h3>
+          </div>
+          <hr/>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}

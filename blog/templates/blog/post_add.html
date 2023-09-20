@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="container">
+    <h1>Them moi bai viet</h1>
+    <hr/>
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+
+        <input type="submit" value="Them moi"/>
+    </form>
+
+</div>
+{% endblock content %}

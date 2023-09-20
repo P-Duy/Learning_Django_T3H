@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+{% block content %}
+<h3>{{news.title}}</h3>
+<hr/>
+<p>{{news.summary}}</p>
+<hr/>
+<p>{{news.content}}</p>
+<hr/>
+<a href="{% url 'new:new' %}">Quay lai danh sach</a>
+{% endblock content %}   
