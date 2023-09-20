@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "register",
     "login2",
     "logout2",
+    "student",
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LIMIT_DEFAULT = 4
 LIMIT_DEFAULT_MIN_HOME = 4
 LIMIT_DEFAULT_MAX_HOME = 3
+LIMIT_STUDENTS = 3

@@ -1,9 +1,5 @@
-{% extends 'main.html' %}
+{% extends "main.html" %}
 {% block content %}
-
-<h1>Danh sach bai viet</h1>
-<hr/>
-
 <div class="row">
     <div class="col">
         <form method="GET" action"">
@@ -17,6 +13,7 @@
             </div>
         </form>
     </div>
+
     <div class="col d-flex justify-content-endf">
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -37,7 +34,7 @@
                         {% endif %}
                     {% endfor %}
                     ">Oldest</a></li>
-                <li><a class="dropdown-item" href="?sort=title{% for key, value in request.GET.items %}{% if key != 'sort' %}& {{key}}={{value}}{% endif %}{% endfor %}">title</a></li>
+                {% comment %} <li><a class="dropdown-item" href="?sort=title{% for key, value in request.GET.items %}{% if key != 'sort' %}& {{key}}={{value}}{% endif %}{% endfor %}">title</a></li> {% endcomment %}
                 </ul> 
         </div>
         <div class="dropdown">
@@ -52,35 +49,36 @@
         </div>
     </div>
 </div>
-<a href="{% url 'blog:post_add'%}" class="btn btn-primary ">Them moi</a>
 <div class="d-flex">
-    
-    {% for item in posts %}
-
-        <div class="card" style="width: 18rem;">
-            <img src="https://placehold.co/150x150" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{item.title}}</h5>
-                <p class="card-text">{{item.summary}}</p>
-                <div class="fixed-left">
-                    <a href="{% url 'blog:post_edit' item.id %}" class="btn btn-primary ">edit</a>
-                    <a href="{% url 'blog:post_delete' item.id %}" class="btn btn-primary ">delete</a>
-                </div>
-            </div>
+    {% for items in students %}
+    <div class="card" style="width: 18rem;">
+        <img src="https://placehold.co/150x150" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{items.get_title}}</h5>
+            <p class="card-text">{{items.dia_chi}}</p>
         </div>
-
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Diem Toan: {{items.diem_toan}}</li>
+                <li class="list-group-item">Diem Van: {{items.diem_van}}</li>
+                <li class="list-group-item">Diem Anh: {{items.diem_anh}}</li>
+            </ul>
+            <div class="fixed-left">
+                <a href="#" class="btn btn-primary ">edit</a>
+                <a href="#" class="btn btn-primary ">delete</a>
+            </div>
+    </div>
     {% endfor %}
 </div>
 <div class="pagination">
     <span class="step-links">
-        {% if posts.has_previous %}
-            <a href="?page={{ posts.previous_page_number }}">First</a>
+        {% if students.has_previous %}
+            <a href="?page={{ students.previous_page_number }}">First</a>
         {% endif %}
         <span class="current">
-            Page {{ posts.number }} / {{ posts.paginator.num_pages }}.
+            Page {{ students.number }} / {{ students.paginator.num_pages }}.
         </span>
-        {% if posts.has_next %}
-            <a href="?page={{ posts.next_page_number }}">next</a>
+        {% if students.has_next %}
+            <a href="?page={{ students.next_page_number }}">next</a>
         {% endif %}
     </span>
 </div>
