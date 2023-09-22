@@ -63,7 +63,7 @@
                 <li class="list-group-item">Diem Anh: {{items.diem_anh}}</li>
             </ul>
             <div class="fixed-left">
-                <a href="#" class="btn btn-primary ">edit</a>
+                <a href="{% url 'student:edit' items.id %}" class="btn btn-primary ">edit</a>
                 <a href="#" class="btn btn-primary ">delete</a>
             </div>
     </div>

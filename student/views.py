@@ -5,6 +5,8 @@ from django.db.models import Q
 
 from .models import Student
 
+from .forms import StudentModelForm, StudentForm
+
 
 # Create your views here.
 def student_view(request):
@@ -49,3 +51,27 @@ def student_detail(request, pk):
     student = get_object_or_404(Student, pk=pk)
     context = {"student": student}
     return render(request, "student/student_detail.html", context)
+
+
+def student_edit(request, pk):
+    model = Student.objects.get(pk=pk)
+
+    form = StudentModelForm(instance=model)
+
+    if request.method == "POST":
+        form = StudentModelForm(request.POST, instance=model)
+        if form.is_valid():
+            form.save()
+            return redirect("student:student")
+
+    context = {
+        "form": form,
+    }
+
+    return render(request, "student/student_edit.html", context)
+
+
+def student_delete(request, pk):
+    model = Student.objects.get(pk=pk)
+    model.delete()
+    return redirect("student:student")
